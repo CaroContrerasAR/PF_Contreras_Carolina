@@ -11,10 +11,13 @@
     <!-- CSS de BT -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
+    <!-- BT icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <!-- link CSS -->
     <link rel="stylesheet" href="./css/style.css">
     
-    <title>Conversor de Monedas</title>
+    <title>Divisas</title>
     <meta name="description" content="Conversor de moneda, cambio de divisas y convertidor para dólares, euros, pesos y otras monedas.">
     <meta name="keywords" content="conversor, convertidor, cambio, moneda, divisas, dolares, euros, pesos">
 </head>
@@ -49,13 +52,13 @@
     </header>
     <main class="container color-fondo m-3">
         <div class="row">
-            <div class="col">
+            <div class="col-xs-12 col-md-6">
                 <img src="./img/cover-divisas-900-470.jpg" class="imgDivisas" alt="imagen Divisas">
             </div>
-            <form class="col" id="form" name="form" action="" method="">
+            <form class="col-xs-12 col-md-6" style="flex-direction:row;" id="form" name="form">
                 <h1>Conversor de Divisas</h1>
                 <label class="form-label" for="">Cantidad</label>
-                <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*" autocomplete="off">
+                <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*">
                 <label class="form-label" for="">De la Divisa</label>
                 <select id="formDivisas1"  aria-labelledby="divisas1">
                     <!-- Selector por Script -->
@@ -64,8 +67,8 @@
                 <select id="formDivisas2" aria-labelledby="divisas2">
                     <!-- Selector por Script -->
                 </select>
-                <button type="button" >
-                    <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">    
+                <button type="button" id="formBtn" class="btn btn-secondary btn-swap"><i class="bi bi-arrow-down-up"></i>
+                    <!-- <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">     -->
                 </button>
 
                 <!-- Acá se van a mostrar las cotizaciones -->
@@ -73,10 +76,23 @@
                     <div id="exchange" style="text-align: center"></div>
                 </div>
             </form>
-                
-            
-            
-            
+        </div>
+        <div class="row">
+            <h2>Nuestro conversor de moneda</h2>
+            <p>Con nuestro único conversor de monedas puedes rápidamente y fácilmente convertir divisas con muchas ventajas a: todas las divisas del mundo, precio del oro y Bitcoin. Actualizaciones de las tasas de cambio cada 5 minutos. Historial de información financiera de los últimos 15 años. Rápido y confortable como una aplicación móvil. Características adicionales como un historial de cambio, copiar el resultado o invertir una conversión. Gráfico interactivo. Practicas tablas de conversión directamente a tu móvil o con posibilidad de imprimirlas como Guía de Bolsillo para tus viajes de vacaciones o negocios.</p>
+        </div>
+        <div class="row">
+            <h2>Múltiple convertidor de divisas y tabla de cambios</h2>
+            <p>¿Te gustaría convertir una cantidad a múltiples monedas al mismo tiempo? ¿O estas buscando una típica tabla de cambio flexible con muchas divisas? Entonces debes echar un vistazo a nuestra única e interactiva tabla de cambios.
+            </p>
+        </div>
+        <div class="row">
+            <h2>Envía dinero a todo el mundo y ahorra en la transferencia</h2>
+            <p>Cada vez más seguido particulares y empresas envían dinero al extranjero usando proveedores especializados en remesas. Transfiriendo de esta manera les permite ahorrar mucho más dinero comparado con las transferencias bancarias o las comisiones de envió de dinero por tarjeta de crédito. ¿Te gustaría saber cuál es el mejor proveedor para tu transferencia internacional? Entonces visita nuestro comparador en tiempo real de envió de dinero y encuentra las mejores ofertas incluyendo promociones especiales.</p>
+        </div>
+        <div class="row">
+            <h2>Información</h2>
+            <p>Nuestro convertidor de moneda (conversor de divisas) y nuestras otras herramientas pueden asistirle en muchas situaciones como referencia adicional (compras en línea, reservar hoteles, convertir monedas extranjeras, mercado FOREX / FX, comercio internacional, mercado de valores y fondo de inversión, comparador de créditos, verificar el resumen de la tarjeta de crédito y en muchos otros casos). Igualmente por favor lee antes nuestros términos.</p>
         </div>
         
 
