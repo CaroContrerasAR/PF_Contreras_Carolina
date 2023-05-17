@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- link CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     
     <title>Conversor de Monedas</title>
     <meta name="description" content="Conversor de moneda, cambio de divisas y convertidor para dólares, euros, pesos y otras monedas.">
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg justify-content-center color-menu">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
-                    <img src="" alt="logo ">
+                    <img src="./img/ms-icon-70x70.png" alt="logo ">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -47,59 +47,35 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h1>Conversor de Divisas</h1>
-        <div class="container">
+    <main class="container color-fondo m-3">
+        <div class="row">
             <div class="col">
-                <img src="./img/cover-divisas-900-470.jpg" class="imgDivisas" alt="imgDivisas">
+                <img src="./img/cover-divisas-900-470.jpg" class="imgDivisas" alt="imagen Divisas">
             </div>
-            <div class="col">
-                <form name="form" action="" method="">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-4">
-                            <div class="form-check form-check-inline">
-                                <label class="form-label" for="">Cantidad</label>
-                                <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-xs-10 col-sm-5 col-md-3">
-                            <div class="form-check form-check-inline">
-                                <label class="form-label" for="">Desde la Divisa</label>
-                                <select id="formDivisas1"  aria-labelledby="divisas1">
-                                    <option value="PESOS" selected="selected">Pesos</option>
-                                    <option value="DOLAR">Dolar</option>
-                                    <option value="EUROS">Euros</option>
-                                    <option value="URUGUAYOS">Uruguayos</option>
-                                    <option value="REALES">Reales</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2">
-                            <button type="button" >
-                                <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">    
-                            </button>
-                        </div>
-                        <div class="col-xs-10 col-sm-5 col-md-3">
-                            <div class="form-check form-check-inline">
-                                <label class="form-label" for="">A la Divisa</label>
-                                <select id="formDivisas2" aria-labelledby="divisas2">
-                                    <option value="PESOS">Pesos</option>
-                                    <option value="DOLAR" selected="selected">Dolar</option>
-                                    <option value="EUROS">Euros</option>
-                                    <option value="URUGUAYOS">Uruguayos</option>
-                                    <option value="REALES">Reales</option>
-                                </select>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <form class="col" id="form" name="form" action="" method="">
+                <h1>Conversor de Divisas</h1>
+                <label class="form-label" for="">Cantidad</label>
+                <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*" autocomplete="off">
+                <label class="form-label" for="">De la Divisa</label>
+                <select id="formDivisas1"  aria-labelledby="divisas1">
+                    <!-- Selector por Script -->
+                </select>
+                <label class="form-label" for="">A la Divisa</label>
+                <select id="formDivisas2" aria-labelledby="divisas2">
+                    <!-- Selector por Script -->
+                </select>
+                <button type="button" >
+                    <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">    
+                </button>
+
+                <!-- Acá se van a mostrar las cotizaciones -->
+                <div id="contenedor" class="row">
+                    <div id="exchange" style="text-align: center"></div>
+                </div>
+            </form>
                 
-            </div>
-            <!-- Acá se van a mostrar las cotizaciones -->
-            <div id="contenedor" class="row">
-                
-            </div>
+            
+            
             
         </div>
         

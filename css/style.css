@@ -11,14 +11,15 @@ body{
 }
 
 /* estilos del menu para BT */
-.color-menu{
+.color-menu {
     background-color: rgb(176, 220, 248);
 }
 
-main{
-    margin: 1rem;
+main{   
+    margin: 0rem;
     width: 100vw;
 }
+
 h1{
     margin: 1rem;
 }
