@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* estilos generales */
+body{
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* estilos del menu para BT */
+.color-menu{
+    background-color: rgb(176, 220, 248);
+}
+
+main{
+    margin: 1rem;
+    width: 100vw;
+}
+h1{
+    margin: 1rem;
+}
+div .row{
+    padding-top: 0.5rem;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+    align-items: center;
+}
+
+imgDivisa {
+    width: 50vw;
+    border-radius: 10px;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5d7da0;
+    border-color: #506c89;
+}
+.btn:hover, .btn:focus, .btn.focus {
+    color: #333;
+    text-decoration: none;
+}
+.btn-secondary {
+    color: #fff;
+    background-color: #7d97b3;
+    border-color: #6d8aaa;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+footer{
+    margin-top: 2rem;
+    text-align: center;
+}
