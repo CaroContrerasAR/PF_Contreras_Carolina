@@ -32,7 +32,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto p-5 mb-2 mb-lg-0 d-flex justify-content-around">
+                    <ul class="navbar-nav me-auto p-5 mb-2 mb-lg-0 d-flex justify-content-space-around">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.html">Conversor</a>
                         </li>
@@ -55,25 +55,35 @@
             <div class="col-xs-12 col-md-6">
                 <img src="./img/cover-divisas-900-470.jpg" class="imgDivisas" alt="imagen Divisas">
             </div>
-            <form class="col-xs-12 col-md-6" style="flex-direction:row;" id="form" name="form">
-                <h1>Conversor de Divisas</h1>
-                <label class="form-label" for="">Cantidad</label>
-                <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*">
-                <label class="form-label" for="">De la Divisa</label>
-                <select id="formDivisas1"  aria-labelledby="divisas1">
-                    <!-- Selector por Script -->
-                </select>
-                <label class="form-label" for="">A la Divisa</label>
-                <select id="formDivisas2" aria-labelledby="divisas2">
-                    <!-- Selector por Script -->
-                </select>
-                <button type="button" id="formBtn" class="btn btn-secondary btn-swap"><i class="bi bi-arrow-down-up"></i>
-                    <!-- <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">     -->
-                </button>
-
-                <!-- Acá se van a mostrar las cotizaciones -->
-                <div id="contenedor" class="row">
-                    <div id="exchange" style="text-align: center"></div>
+            <form class="col-xs-12 col-md-6" id="form" name="form">
+                <div class="row">
+                    <h1>Conversor de Divisas</h1>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <label class="form-label" for="">Cantidad</label>
+                        <input id="formCantidad" class="formCantidad" type="number" inputmode="decimal" pattern="[0-9\.',]*">
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-10">
+                        <label class="form-label" for="">De la Divisa</label>
+                        <select id="formDivisas1"  aria-labelledby="divisas1">
+                                <!-- Selector por Script -->
+                        </select>
+                    </div>
+                    <div class="col.md-4 col-sm-2 col-xs-2">
+                        <button type="button" id="formBtn" class="btn btn-secondary btn-swap"><i class="bi bi-arrow-down-up"></i>
+                            <!-- <img id="formBtn" class="btn btn-secondary btn-swap" src="img/ms-icon-70x70.png" alt="Intercambio">     -->
+                        </button>
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-10">
+                        <label class="form-label" for="">A la Divisa</label>
+                        <select id="formDivisas2" aria-labelledby="divisas2">
+                            <!-- Selector por Script -->
+                        </select>
+                    </div>
+                    
+                    <!-- Acá se van a mostrar las cotizaciones -->
+                    <div id="contenedor" class="row">
+                        <div id="exchange" style="text-align: center"></div>
+                    </div>
                 </div>
             </form>
         </div>

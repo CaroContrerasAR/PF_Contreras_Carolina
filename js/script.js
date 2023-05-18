@@ -1,5 +1,5 @@
-// let percep = asignarOperacion("percepcion")
-// let imp = asignarOperacion("imppais")
+let percep = asignarOperacion("percepcion")
+let imp = asignarOperacion("imppais")
 
 class Monedas {
   constructor(id, nombre, signo, compra, venta) {
@@ -43,21 +43,24 @@ document.getElementById("form").addEventListener("submit", (e) => {
 })
 
 cantidad.onchange = () => {
-  console.log("change cantidad");
-  calcular(divisa1, divisa2);
+  if(cantidad.value > 0){
+    calcular (divisa1, divisa2);
+  }else{exc.innerHTML ="la cantidad debe ser mayor que cero"}
 }
 
 divisa1.onchange = () => {
-  console.log("change div1");
-  calcular(divisa1, divisa2);
+  if(cantidad.value > 0){
+    calcular (divisa1, divisa2);
+  }else{exc.innerHTML ="la cantidad debe ser mayor que cero"}
   // if (divisa1.text == "Pesos") {
   //   exc.innerHTML = `<p> Cambio por <strong>${resultado.toFixed(4)}</strong>\n recuerde agregar los Impuestos sobre la operacion:\n 35% de Percepcion RG4815/20 son $ ${percep(cantidad.value)}\n 30% de Impuesto Pais son $ ${imp(cantidad.value)}</p>`;
   // }
 }
 
 divisa2.onchange = () => {
-  console.log("change div2");
-  calcular(divisa1, divisa2);
+  if(cantidad.value > 0){
+    calcular (divisa1, divisa2);
+  }else{exc.innerHTML ="la cantidad debe ser mayor que cero"}
 }
 
 const calcular = (divisa1, divisa2) => {
@@ -65,7 +68,7 @@ const calcular = (divisa1, divisa2) => {
   let resultado = cantidad.value * (divisa1.value / divisa2.value);
   let nameD1 = divisa1.text;
   let nameD2 = divisa2.text;
-  exc.innerHTML = `<p> Cambio ${cantidad.value} por <strong>${resultado.toFixed(4)} </strong></p>`;
+  exc.innerHTML = `<p> Cambio ${cantidad.value} = <strong>${resultado.toFixed(4)} </strong></p>`;
 }
 //   if(divisa1.text!="Pesos"){
 //   exc.innerHTML = `<p> El Cambio es <strong>${(resultado).toFixed(4)}</strong></p>`
@@ -101,17 +104,19 @@ function mostrarMonedas(){
 }
 
 function respuestaClick(){
-  temp=divisa1.value
-  divisa1.value=divisa2.value
-  divisa2.value=temp
-  calcular(divisa1,divisa2)
+  if(cantidad.value > 0){
+    temp=divisa1.value
+    divisa1.value=divisa2.value
+    divisa2.value=temp
+    calcular (divisa1, divisa2);
+  }else{exc.innerHTML ="la cantidad debe ser mayor que cero"}
 }
 
 
-// function asignarOperacion(op) {
-//     if (op == "percepcion") {
-//         return (monto) => monto*=0.35
-//     } else if (op == "imppais") {
-//         return (monto) => monto*=0.30
-//     }
-// }
+function asignarOperacion(op) {
+    if (op == "percepcion") {
+        return (monto) => monto*=0.35
+    } else if (op == "imppais") {
+        return (monto) => monto*=0.30
+    }
+}

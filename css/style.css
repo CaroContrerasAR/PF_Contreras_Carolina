@@ -18,17 +18,20 @@ body{
 main{   
     margin: 0rem;
     width: 100vw;
+    align-items: center;
 }
 
-h1{
-    margin: 1rem;
+h1, h2 {
+    margin: .3rem;
+    padding: 5px;
 }
 
 div .row{
     padding: 2rem;
-    margin: 3rem;
-    text-align: center;
-    align-items: center;
+    margin: .5rem;
+    text-align:justify;
+    align-items: stretch;
+    width: 50vw;
 }
 
 img {
@@ -38,6 +41,9 @@ img {
     border-radius: 10px;
 }
 
+p{
+    padding: 1rem;
+}
 .btn-secondary:hover {
     color: #fff;
     background-color: #5d7da0;
@@ -54,6 +60,7 @@ img {
     color: #fff;
     background-color: #7d97b3;
     border-color: #6d8aaa;
+    transform: rotateX(90);
 }
 .btn {
     display: inline-block;
@@ -69,13 +76,13 @@ img {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    border-radius: 0;
+    border-radius: 10;
     -webkit-user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     user-select: none;
 }
-footer{
+footer {
     margin-top: 2rem;
     text-align: center;
 }
