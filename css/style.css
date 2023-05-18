@@ -6,6 +6,7 @@
 
 /* estilos generales */
 body{
+    width: 100vw;
     overflow-x:scroll;
     font-family: 'Roboto', sans-serif;
 }
@@ -27,11 +28,11 @@ h1, h2 {
 }
 
 div .row{
-    padding: 2rem;
+    padding: .1rem;
     margin: .5rem;
     text-align:justify;
     align-items: stretch;
-    width: 50vw;
+    width: 49vw;
 }
 
 img {
@@ -60,7 +61,8 @@ p{
     color: #fff;
     background-color: #7d97b3;
     border-color: #6d8aaa;
-    transform: rotateX(90);
+    rotate: 90deg;
+    align-items: end;
 }
 .btn {
     display: inline-block;
@@ -85,4 +87,9 @@ p{
 footer {
     margin-top: 2rem;
     text-align: center;
+}
+@media (width <= 576px) {
+    .btn-secondary {
+        rotate: 90deg;
+    }
 }

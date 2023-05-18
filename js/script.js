@@ -68,7 +68,7 @@ const calcular = (divisa1, divisa2) => {
   let resultado = cantidad.value * (divisa1.value / divisa2.value);
   let nameD1 = divisa1.text;
   let nameD2 = divisa2.text;
-  exc.innerHTML = `<p> Cambio ${cantidad.value} = <strong>${resultado.toFixed(4)} </strong></p>`;
+  exc.innerHTML = `<h3> El Cambio es ${cantidad.value} = <strong>${resultado.toFixed(4)} </strong></h3>`;
 }
 //   if(divisa1.text!="Pesos"){
 //   exc.innerHTML = `<p> El Cambio es <strong>${(resultado).toFixed(4)}</strong></p>`
