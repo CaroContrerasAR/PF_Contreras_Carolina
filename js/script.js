@@ -105,9 +105,9 @@ const calcular = (divisa1Select, divisa2Select) => {
   localStorage.setItem("resultado", resultado);
     
   if (divisa1Select.text != "Pesos") {
-    exc.innerHTML = `<p> ${cantidadInput.value} ${divisa1.text}<strong> = ${(resultado).toFixed(4)}</strong> ${divisa2.text}</p>`
+    exc.innerHTML = `<p> ${cantidadInput.value} ${divisa1.text}<strong> = ${(resultado).toFixed(4).replace(/\.?0+$/, "")}</strong> ${divisa2.text}</p>`
   } else {
-    exc.innerHTML = `<p> El Cambio es ${divisa1.text}<strong>${(resultado).toFixed(4)}</strong>${divisa2.text}. Recuerde agregar los Impuestos sobre la operacion:</p> <p> 35% de Percepcion RG4815/20 son $ ${percep(cantidad).toFixed(2)}</p> <p> 30% de Impuesto Pais son $ ${imp(cantidad).toFixed(2)}</p>`
+    exc.innerHTML = `<p> El Cambio es ${divisa1.text}<strong>${(resultado).toFixed(4).replace(/\.?0+$/, "")}</strong>${divisa2.text}. Recuerde agregar los Impuestos sobre la operacion:</p> <p> 35% de Percepcion RG4815/20 son $ ${percep(cantidad).toFixed(2)}</p> <p> 30% de Impuesto Pais son $ ${imp(cantidad).toFixed(2)}</p>`
   }
 };
 
