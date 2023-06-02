@@ -1,20 +1,14 @@
-class Monedas {
-  constructor(id, nombre, signo, compra, venta) {
-    this.id  = parseInt(id);
-    this.nombre  = nombre.toUpperCase();
-    this.signo = signo.toUpperCase();
-    this.compra  = parseFloat(compra);
-    this.venta  = parseFloat(venta);
-  }
-}
+let moneda = [];
 
-//Declaramos un array de Monedas para almacenar
-const moneda = [];
-moneda.push(new Monedas (1, "Pesos", "ar$", 1, 1));
-moneda.push(new Monedas (2, "Dolar", "u$s", 210.82, 211.22));
-moneda.push(new Monedas (3, "Euros", "€", 229.5830, 230.5466));
-moneda.push(new Monedas (4, "Uruguayos", "$u", 4.21, 4.41));
-moneda.push(new Monedas (5, "Reales", "r$", 41.15, 43.75));
+fetch ("../js/monedas.json")
+    .then (response => response.json())
+    .then (data => {
+        moneda = data;
+        mostrarMonedas();
+    })
+    .catch(error => {
+      console.error("Error al obtener los datos del archivo JSON", error);
+    })
 
 //Obtenemos la referencia del elemento body
 let body = document.getElementsByTagName("body")[0];
@@ -26,7 +20,7 @@ let tblBody = document.createElement("tbody");
 // Declaro variables para DOM
 let cantidadInput = document.getElementById("formCantidad")
 let exc = document.getElementById("exchange")
-exc.innerHTML = "";
+//exc.innerHTML = "";
 
 // Función para generar la tabla
 const generarTabla = () => {
@@ -99,50 +93,4 @@ const generarTabla = () => {
 };
 
 // Asignar el evento onchange al input de cantidad
-// if (cantidadInput.value > 0) {
-  cantidadInput.addEventListener("change", generarTabla);
-// } else {
-//   // Limpiar el contenedor de la tabla
-//   //exc.innerHTML = "";
-
-//   exc.innerHTML = "la cantidad debe ser mayor que cero";
-// }
-
-// // Creamos las celdas
-// cantidadInput.onchange = (e) => {
-//   e.preventDefault();
-  
-//   if (cantidadInput.value > 0) {
-//     for (let i = 0; i < moneda.length; i++) {
-      
-//       // Creamos las hileras de la tabla
-//       let fila = document.createElement("tr");
-//       for (let j = 0; j < moneda.length; j++) {
-      
-//         // Crea un elemento <td> y un nodo de texto, hace que el nodo de
-//         // texto sea el contenido de <td>, ubica el elemento <td> al final
-//         // de la hilera de la tabla
-//         let celda = document.createElement("td");
-//         let textoCelda = document.createTextNode(" | "+(cantidadInput.value * (moneda[i].compra / moneda[j].compra)).toFixed(3)+" ");
-        
-//         celda.appendChild(textoCelda);
-//         fila.appendChild(celda);
-//       }
-//       // agregamos la hilera al final de la tabla (al final del elemento tblbody)
-//       tblBody.appendChild(fila);
-//     }
-//     // posicionamos el <tbody> debajo del elemento <table>
-//     tabla.appendChild(tblBody);
-//     // appends <table> into <body>
-//     body.appendChild(tabla);
-//     // modifica el atributo "border" de la tabla y lo fija a "2";
-//     tabla.setAttribute("border", 1);
-//     tabla.setAttribute("id", "tabla");
-//     // let result = document.getElementById("exc");
-    
-//     exc.appendChild(tabla);
-
-//   } else { exc.innerHTML = "la cantidad debe ser mayor que cero" }
-  
-// };
-
+cantidadInput.addEventListener("change", generarTabla);

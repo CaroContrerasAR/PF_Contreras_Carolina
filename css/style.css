@@ -22,12 +22,20 @@ main{
     align-items: center;
 }
 
-h1, h2 {
+ul, a,  h1, h2 {
     margin: 0;
     padding: 5px;
 }
 
-div .row{
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+div .row {
     padding: .1rem;
     margin: .5rem;
     text-align:justify;
@@ -84,6 +92,10 @@ p{
     -moz-user-select: none;
     user-select: none;
 }
+/* table td, table th {
+    overflow-x: hidden;
+} */
+
 footer {
     margin-top: 2rem;
     text-align: center;
