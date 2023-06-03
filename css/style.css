@@ -61,6 +61,7 @@ p{
 }
 .btn:hover, .btn:focus, .btn.focus {
     color: #333;
+    background-color: #7d97b3;
     font-style: italic;
     text-decoration: none;
     text-shadow: rgba(0, 0, 0, .5);
@@ -70,7 +71,13 @@ p{
     background-color: #7d97b3;
     border-color: #6d8aaa;
     rotate: 90deg;
-    align-items: end;
+    align-items:end;
+}
+.btn-swap{
+    color: #fff;
+    background-color: #7d97b3;
+    border-color: #6d8aaa;
+    align-items:end;
 }
 .btn {
     display: inline-block;
