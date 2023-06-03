@@ -60,11 +60,16 @@ boton.addEventListener("click", function () {
 });
 document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
-  cantidadInput.value > 0 ? calcular(divisa1Select, divisa2Select) : exc.innerHTML = "La cantidad debe ser mayor que cero"
+  cantidadInput.value > 0 ? calcular(divisa1Select, divisa2Select) : Toastify({
+    text: "La cantidad debe ser mayor a cero",
+    duration: 2000,
+    gravity: "top",
+    position: "center",
+  }).showToast();
 });
-cantidadInput.onchange = () => {cantidadInput.value > 0 ? calcular(divisa1Select, divisa2Select) : exc.innerHTML = "La cantidad debe ser mayor que cero"};
-divisa1Select.onchange = () => {cantidadInput.value > 0 ? calcular(divisa1Select, divisa2Select) : exc.innerHTML = "La cantidad debe ser mayor que cero"};
-divisa2Select.onchange = () => {cantidadInput.value > 0 ? calcular(divisa1Select, divisa2Select) : exc.innerHTML = "La cantidad debe ser mayor que cero"};
+cantidadInput.onchange = () => calcular(divisa1Select, divisa2Select);
+divisa1Select.onchange = () => calcular(divisa1Select, divisa2Select);
+divisa2Select.onchange = () => calcular(divisa1Select, divisa2Select);
 
 // Función para calcular la conversión
 const calcular = (divisa1Select, divisa2Select) => {
@@ -87,7 +92,15 @@ const calcular = (divisa1Select, divisa2Select) => {
     let imp = asignarOperacion("imppais");
     let percepcion = percep(cantidad);
     let impuesto = imp(cantidad);
-    exc.innerHTML = `<p>${cantidadInput.value} ${divisa1.text} <strong>= ${resultado.toFixed(4).replace(/\.?0+$/, "")} ${divisa2.text}</strong>.<br>Recuerde agregar los Impuestos sobre la operación:<br>35% de Percepción RG4815/20 son $ ${percepcion.toFixed(2).replace(/\.?0+$/, "")}<br>30% de Impuesto País son $ ${impuesto.toFixed(2).replace(/\.?0+$/, "")}</p>`;
+    exc.innerHTML = `<p>${cantidadInput.value} ${divisa1.text} <strong>= ${resultado.toFixed(4).replace(/\.?0+$/, "")} ${divisa2.text}</strong></p>`;
+    Toastify({
+      text: `En Argentina: Recuerde agregar los Impuestos sobre la operación:
+             35% de Percepción RG4815/20 son $ ${percepcion.toFixed(2).replace(/\.?0+$/, "")}
+             30% de Impuesto País son $ ${impuesto.toFixed(2).replace(/\.?0+$/, "")}`,
+      duration: 2000,
+      gravity: "top",
+      position: "center",
+    }).showToast();   
   }
 };
 

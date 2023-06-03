@@ -36,7 +36,8 @@ a {
 }
 
 div .row {
-    padding: .1rem;
+    /* padding: 0.1rem */
+    padding: 5px;
     margin: .5rem;
     text-align:justify;
     align-items: stretch;
