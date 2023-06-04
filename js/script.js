@@ -47,8 +47,8 @@ let divisa2LS = localStorage.getItem("divisa2");
 
 if (cantidadLS && divisa1LS && divisa2LS) {
   cantidadInput.value = cantidadLS;
-  divisa1Select.value = divisa1LS; console.log("si Paso1");
-  divisa2Select.value = divisa2LS; console.log("si Paso2");
+  divisa1Select.value = divisa1LS;
+  divisa2Select.value = divisa2LS;
 }
 
 // Eventos
@@ -99,7 +99,7 @@ const calcular = (divisa1Select, divisa2Select) => {
              30% de Impuesto País son $ ${impuesto.toFixed(2).replace(/\.?0+$/, "")}`,
       duration: 2000,
       gravity: "top",
-      position: "center",
+      position: "right",
     }).showToast();   
   }
 };

@@ -1,14 +1,16 @@
-let moneda = [];
+let usuarioAutorizado = "admin";
+let passwordAutorizado = 1234;
 
-fetch ("../js/monedas.json")
-    .then (response => response.json())
-    .then (data => {
-        moneda = data;
-        mostrarMonedas();
+//Otro opcion fetch con promesas
+async function moneda() {
+  const resp = await fetch("../js/monedas.json")
+    .then((res) => res.json())
+    .then((data) => {
+      moneda = data;
     })
-    .catch(error => {
-      console.error("Error al obtener los datos del archivo JSON", error);
-    })
+  return resp
+}
+console.log(moneda())
 
 //Obtenemos la referencia del elemento body
 let body = document.getElementsByTagName("body")[0];
@@ -20,9 +22,32 @@ let tblBody = document.createElement("tbody");
 // Declaro variables para DOM
 let cantidadInput = document.getElementById("formCantidad")
 let exc = document.getElementById("exchange")
-let print = document.getElementById("print")
-let mail = document.getElementById("mail")
-//exc.innerHTML = "";
+let imprimir = document.getElementById("imprimir")
+let correo = document.getElementById("correo")
+
+// Obtener cantidad del LS
+let cantidad = localStorage.getItem("cantidad");
+cantidadInput.value = cantidad && cantidad > 0 ? cantidad : "";
+
+// Verificar errores al cargar la página
+window.addEventListener("DOMContentLoaded", () => {
+  if (cantidad && cantidad <= 0) {
+    cantidadInput.value = "";
+    Toastify({
+      text: "La cantidad debe ser mayor a cero",
+      duration: 2000,
+      gravity: "top",
+      position: "center",
+    }).showToast();
+  }
+});
+
+// Guardo cantidad en LS
+cantidadInput.addEventListener("change", () => {
+  let cantidad = cantidadInput.value;
+  localStorage.setItem("cantidad", cantidad > 0 ? cantidad : "");
+  generarTabla();
+});
 
 // Función para generar la tabla
 const generarTabla = () => {
@@ -87,83 +112,63 @@ const generarTabla = () => {
   exc.appendChild(tabla);
 };
 
+// function printDiv(divName) {
+//   let printContents = document.getElementById(divName).innerHTML;
+//   let originalContents = document.body.innerHTML;
+//   document.body.innerHTML = printContents;
+//   window.print();
+//   document.body.innerHTML = originalContents;
+// }
+
 // Eventos
 document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
-  cantidadInput.value > 0 ? generarTabla() : Toastify({
-    text: "La cantidad debe ser mayor a cero",
-    duration: 2000,
-    gravity: "top",
-    position: "center",
-  }).showToast();
+  cantidadInput.value > 0
+    ? generarTabla()
+    : Toastify({
+        text: "La cantidad debe ser mayor a cero",
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+      }).showToast();
 });
 
 cantidadInput.addEventListener("change", generarTabla);
 
-print.addEventListener("click", () =>{
-  exc.innerHTML != "" ? window.print() : Toastify({
-    text: "Debe ingresar una Cantidad",
-    duration: 2000,
-    gravity: "top",
-    position: "center",
-  }).showToast();   
-})
-
-mail.addEventListener("click", () =>{
+imprimir.addEventListener("click", () => {
   exc.innerHTML != ""
-  // ? {const swalWithBootstrapButtons = Swal.mixin({
-  //   customClass: {
-  //     confirmButton: 'btn btn-success',
-  //     cancelButton: 'btn btn-danger'
-  //   },
-  //   buttonsStyling: false
-  // })
-  
-  // swalWithBootstrapButtons.fire({
-  //   title: 'Are you sure?',
-  //   text: "You won't be able to revert this!",
-  //   icon: 'warning',
-  //   showCancelButton: true,
-  //   confirmButtonText: 'Yes, delete it!',
-  //   cancelButtonText: 'No, cancel!',
-  //   reverseButtons: true
-  // }).then((result) => {
-  //   if (result.isConfirmed) {
-  //     swalWithBootstrapButtons.fire(
-  //       'Deleted!',
-  //       'Your file has been deleted.',
-  //       'success'
-  //     )
-  //   } else if (
-  //     /* Read more about handling dismissals below */
-  //     result.dismiss === Swal.DismissReason.cancel
-  //   ) {
-  //     swalWithBootstrapButtons.fire(
-  //       'Cancelled',
-  //       'Your imaginary file is safe :)',
-  //       'error'
-  //     )
-  //   }
-  // })}
-    ? Swal.fire({
-        title: "Enviar Mail",
-        text: "Estas Registrado?",
-        icon:"question",
-        reverseButtons: true,
-        showCancelButton: true,
-        confirmButtontext:"Si, estoy registrado",
-        cancelButtontext:"No, estoy registrado",
-        background: "#5d7da0",
-        color:"white",
-        // backdrop: "#b7950b",
-        backdropfilter: blur(1),
-      }).then((result)=>{
-        result.isConfirmed ? Swal.Fire("login","","success") : Swal.Fire("Registrate","","info")
-      })
+    ? window.print() //printDiv(contenedor)
     : Toastify({
         text: "Debe ingresar una Cantidad",
         duration: 2000,
         gravity: "top",
         position: "center",
-      }).showToast();   
+      }).showToast();
+});
+
+correo.addEventListener("click", () =>{
+  exc.innerHTML != ""
+  ? Swal.fire({
+      title:"Inicio de Sesión",
+      html:`<input type="text" id="usuario" class="swal12-input" placeholder="Usuario">
+            <input type="password" id="password" class="swal12-input" placeholder="Password">`,
+      confirmButtonText: "Enviar",
+      showCancelButton:true,
+      cancelButtonText:"Cancelar",
+  }).then((result)=>{
+      if(result.isConfirmed){
+        let usuario = document.getElementById("usuario").value;
+        let password = document.getElementById("password").value;
+        //si quiero enviarte a otra pagina:
+        if (usuario === usuarioAutorizado && password == passwordAutorizado){
+          window.location.href = "../pages/login.html";
+        }
+      }
+  })
+  : Toastify({
+    text: "Debe ingresar una Cantidad",
+    duration: 2000,
+    gravity: "top",
+    position: "center",
+  }).showToast();   
 })
