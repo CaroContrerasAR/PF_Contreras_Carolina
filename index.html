@@ -82,14 +82,34 @@
                     
                     <!-- Acá se van a mostrar las cotizaciones -->
                     <div id="contenedor" class="row">
+                        <button type="button" id="formBtn2" class="btn btn-swap" data-bs-toggle="modal" data-bs-target="#conversionesModal" data-bs-dismiss="modal">
+                            ver
+                        </button>
                         <div id="exchange" style="text-align: start"></div>
+                    </div>
+                    <!-- Elemento <div> para mostrar la tabla -->
+                    <div id="conversionesTable" class="row"></div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="conversionesModal" tabindex="-1" aria-labelledby="conversionesModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="conversionesModalLabel">Conversiones Realizadas</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <table id="conversionesTableBody" class="table"></table>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <div class="row">
             <h2>Nuestro conversor de moneda</h2>
-            <p>Con nuestro único conversor de monedas puedes rápidamente y fácilmente convertir divisas con muchas ventajas a: todas las divisas del mundo, precio del oro y Bitcoin. Actualizaciones de las tasas de cambio cada 5 minutos. Historial de información financiera de los últimos 15 años. Rápido y confortable como una aplicación móvil. Características adicionales como un historial de cambio, copiar el resultado o invertir una conversión. Gráfico interactivo. Practicas tablas de conversión directamente a tu móvil o con posibilidad de imprimirlas como Guía de Bolsillo para tus viajes de vacaciones o negocios.</p>
+            <p>Con nuestro único conversor de monedas puedes rápidamente y fácilmente convertir divisas con muchas ventajas a: todas las divisas del mundo, precio del oro y Bitcoin. Actualizaciones de las tasas de cambio cada 5 minutos. Rápido y confortable como una aplicación móvil. Características adicionales como un historial de cambio, copiar el resultado o invertir una conversión. Practicas tablas de conversión directamente a tu móvil o con posibilidad de imprimirlas como Guía de Bolsillo para tus viajes de vacaciones o negocios.</p>
         </div>
         <div class="row">
             <h2>Múltiple convertidor de divisas y tabla de cambios</h2>

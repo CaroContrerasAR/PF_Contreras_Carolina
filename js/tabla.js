@@ -1,5 +1,7 @@
 let usuarioAutorizado = "admin";
 let passwordAutorizado = 1234;
+let registrado = false;
+let loginContainer = null; 
 
 //Otro opcion fetch con promesas
 async function moneda() {
@@ -112,6 +114,12 @@ const generarTabla = () => {
   exc.appendChild(tabla);
 };
 
+function esUsuarioRegistrado() {
+  const usuario = localStorage.getItem("usuario");
+  const password = localStorage.getItem("password");
+  return usuario === usuarioAutorizado && password === passwordAutorizado;
+}
+
 // function printDiv(divName) {
 //   let printContents = document.getElementById(divName).innerHTML;
 //   let originalContents = document.body.innerHTML;
@@ -120,20 +128,22 @@ const generarTabla = () => {
 //   document.body.innerHTML = originalContents;
 // }
 
+
 // Eventos
-document.getElementById("form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  cantidadInput.value > 0
-    ? generarTabla()
-    : Toastify({
-        text: "La cantidad debe ser mayor a cero",
-        duration: 2000,
-        gravity: "top",
-        position: "center",
-      }).showToast();
-});
+// document.getElementById("form").addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   cantidadInput.value > 0
+//     ? generarTabla()
+//     : Toastify({
+//         text: "La cantidad debe ser mayor a cero",
+//         duration: 2000,
+//         gravity: "top",
+//         position: "center",
+//       }).showToast();
+// });
 
 cantidadInput.addEventListener("change", generarTabla);
+
 
 imprimir.addEventListener("click", () => {
   exc.innerHTML != ""
@@ -146,29 +156,237 @@ imprimir.addEventListener("click", () => {
       }).showToast();
 });
 
-correo.addEventListener("click", () =>{
-  exc.innerHTML != ""
-  ? Swal.fire({
-      title:"Inicio de Sesión",
-      html:`<input type="text" id="usuario" class="swal12-input" placeholder="Usuario">
-            <input type="password" id="password" class="swal12-input" placeholder="Password">`,
-      confirmButtonText: "Enviar",
-      showCancelButton:true,
-      cancelButtonText:"Cancelar",
-  }).then((result)=>{
-      if(result.isConfirmed){
-        let usuario = document.getElementById("usuario").value;
-        let password = document.getElementById("password").value;
-        //si quiero enviarte a otra pagina:
-        if (usuario === usuarioAutorizado && password == passwordAutorizado){
-          window.location.href = "../pages/login.html";
+
+//   // Configurar el evento de clic para el botón de cerrar sesión
+//   const logoutBtn = document.getElementById("logout-btn");
+//   logoutBtn.addEventListener("click", () => {
+//     // Borrar el contenido del login
+//     loginContainer.innerHTML = `<p>Hola...</p>`;
+//     registrado = false;
+//     localStorage.removeItem("loguin");
+//   });
+// }
+
+correo.addEventListener("click", () => {
+  if (exc.innerHTML !== "" && cantidad > 0) {
+    if (registrado) {
+      enviarInfo();
+    } else {
+      Swal.fire({
+        title: "Registro",
+        html: `<input type="text" id="nombre" class="swal12-input" placeholder="Nombre">
+              <input type="email" id="email" class="swal12-input" placeholder="Email">`,
+        confirmButtonText: "Registrarse",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let nombre = document.getElementById("nombre").value;
+          let email = document.getElementById("email").value;
+
+          // Guardar los datos del usuario en el localStorage
+          localStorage.setItem("login", JSON.stringify({ nombre, email }));
+
+          Swal.fire({
+            title: "¡Registro exitoso!",
+            text: `Hola, ${email}`,
+            icon: "success",
+          });
+
+          mostrarLogin(email);
+          registrado = true;
         }
-      }
-  })
-  : Toastify({
-    text: "Debe ingresar una Cantidad",
-    duration: 2000,
-    gravity: "top",
-    position: "center",
-  }).showToast();   
-})
+      });
+    }
+  } else {
+    Toastify({
+      text: "Debe ingresar una Cantidad",
+      duration: 2000,
+      gravity: "top",
+      position: "center",
+    }).showToast();
+  }
+});
+
+function realizarLogin() {
+  let usuario = document.getElementById("usuario").value;
+  let password = document.getElementById("password").value;
+
+  if (usuario === usuarioAutorizado && password === passwordAutorizado) {
+    Swal.fire({
+      title: "¡Bienvenido!",
+      text: `Hola, ${usuario}`,
+      icon: "success",
+    });
+
+    mostrarLogin(usuario);
+    registrado = true;
+
+    enviarInfo();
+  } else {
+    Swal.fire({
+      title: "Acceso denegado",
+      text: "Las credenciales son incorrectas",
+      icon: "error",
+    });
+  }
+}
+
+function mostrarLogin(usuario) {
+  const loginContainer = document.getElementById("login-container");
+
+  // Mostrar el formulario de inicio de sesión
+  loginContainer.innerHTML = `
+    <small>Hola, ${usuario}
+    <button id="logout-btn" class="btn btn-swap">Logout</button>
+    </small>`;
+
+  localStorage.setItem("login", JSON.stringify({ nombre, email }));
+  
+  // Mostrar el mensaje de "enviado" utilizando SweetAlert
+  Swal.fire({
+    title: "¡Mensaje enviado!",
+    text: "Tu mensaje ha sido enviado correctamente.",
+    icon: "success",
+  });
+
+  // Configurar el evento de clic para el botón de cerrar sesión
+  const logoutBtn = document.getElementById("logout-btn");
+  logoutBtn.addEventListener("click", () => {
+    // Borrar el contenido del login
+    loginContainer.innerHTML = `<p>Hola...</p>`;
+    registrado = false;
+    localStorage.removeItem("login");
+  });
+}
+
+// Verificar si hay datos de inicio de sesión guardados en el localStorage
+const savedLogin = localStorage.getItem("login");
+if (savedLogin) {
+  const { nombre, email } = JSON.parse(savedLogin);
+  mostrarLogin(email);
+  registrado = true;
+}
+
+cantidadInput.addEventListener("change", (event) => {
+  if (!registrado) {
+    cantidad = event.target.value;
+    localStorage.setItem("cantidad", cantidad);
+  }
+});
+
+function enviarInfo() {
+  if (cantidad) {
+    Swal.fire({
+      title: "Información enviada",
+      text: `Cantidad: ${cantidad}`,
+      icon: "success",
+    });
+  } else {
+    Swal.fire({
+      title: "Error",
+      text: "Debe ingresar una cantidad",
+      icon: "error",
+    });
+  }
+}
+
+
+// if (localStorage.getItem('usuario')){  
+//   const swalWithBootstrapButtons = Swal.mixin({
+//       customClass: {
+//           confirmButton: 'btn btn-success',
+//           cancelButton: 'btn btn-danger'
+//       },
+//       buttonsStyling: true
+//   })
+
+//       swalWithBootstrapButtons
+//       .fire({
+//           title: 'Datos de usuario almacenados',
+//           text: "¿Desea que le enviemos lo ultimo consultado?",
+//           icon: 'warning',
+//           showCancelButton: true,
+//           confirmButtonText: 'Si, por favor!',
+//           cancelButtonText: 'No, gracias!',
+//           reverseButtons: true
+//       })
+//       .then((result) => {
+//           if (result.isConfirmed) {
+//               swalWithBootstrapButtons.fire(
+//                   'Excelente!',
+//                   'Mail Enviado !!',
+//                   'success'
+//               )
+//               let usuario = JSON.parse(localStorage.getItem("usuario"));
+//               document.getElementById("formNombre").value = usuario.nombre;
+//               document.getElementById("formEmail").value = usuario.email;
+//               controln=1;
+//               controle=1;
+//           } else if (
+//               /* Read more about handling dismissals below */
+//               result.dismiss === Swal.DismissReason.cancel
+//           ) {
+//               swalWithBootstrapButtons.fire(
+//                   'Excelente',
+//                   'Ya puede continuar ingresando nuevos datos',
+//                   'success'
+//               )
+//               localStorage.removeItem('usuario');
+//           }
+//       })
+//   }
+
+// //Control de datos de ingresados
+
+// document.getElementById("formApellido").onchange = function() {myFunctionApellido()};
+// function myFunctionApellido() {
+//   if (apellido.value == null || apellido.value.length == 0 || /^\s+$/.test(apellido.value)){
+//       Swal.fire('Ingrese una APELLIDO valido');
+//       apellido.value=""
+//       controlap=0;
+//   }
+//   else {
+//       controlap=1;
+//   }
+// }
+
+// document.getElementById("formNombre").onchange = function() {myFunctionNombre()};
+// function myFunctionNombre() {
+//   if (nombre.value == null || nombre.value.length == 0 || /^\s+$/.test(nombre.value)){
+//       Swal.fire('Ingrese una NOMBRE valido');
+//       nombre.value=""
+//       controln=0;
+//   }
+//   else {
+//       controln=1;
+//   }
+// }
+
+// document.getElementById("formEmail").onchange = function() {myFunctionEmail()};
+// function myFunctionEmail() {
+//   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formEmail.value)){
+//       controle=1;
+//   }
+//   else {
+//       Swal.fire('Ingrese una EMAIL Valido');
+//       email.value=""
+//       controle=0;
+//   }
+// }
+
+
+// function X () {
+//   if (cantidad.value<1){
+//       Swal.fire('Ingrese una CANTIDAD Valida');
+//       return; 
+//   }
+//   if (controln==0 || controle==0 == "-- Seleccionar --"){
+//       Swal.fire('Complete todos los datos');
+//       return;
+//   }
+
+//   let usuario = {nombre:nombre.value , email:email.value};
+//   const enJSON = JSON.stringify(usuario);
+//   localStorage.setItem("datoscliente", enJSON);
+// }
